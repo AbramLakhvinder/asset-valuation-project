@@ -23,9 +23,19 @@ def Transformation_binaire(dataframe, colonne, nouvelleColonne):
     return dataframe
 
 def remplacer_au_dessus_seuil(dataframe, colonne, seuil):
-    dataframe.loc[dataframe[colonne]>40000, colonne] = np.nan
+    dataframe.loc[dataframe[colonne]>seuil, colonne] = np.nan
     return dataframe
 
 def fusionner_categories(dataframe, colonne, mapping):
     dataframe[colonne] = dataframe[colonne].replace(mapping)
     return dataframe 
+
+def extraire_dates(df, colonne_date): 
+    df2 = df.copy()
+    df2["saleyear"] = df2[colonne_date].dt.year
+    df2["salemonth"] = df2[colonne_date].dt.month
+    df2["salequarter"] = df2[colonne_date].dt.quarter
+    df2 = df2.drop(columns=[colonne_date])
+    return df2
+
+
