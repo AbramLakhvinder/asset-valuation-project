@@ -38,4 +38,17 @@ def extraire_dates(df, colonne_date):
     df2 = df2.drop(columns=[colonne_date])
     return df2
 
+def imputation_mediane_a_nan(train, test, colonnegroupement, colonneimputer, seuil): 
+    train2 = train.copy()
+    test2 = test.copy()
+    CountObs = train2.groupby(colonnegroupement)[colonneimputer].count() 
+    CountKeep = CountObs[CountObs>=seuil].index 
+    medianecalcule = train2.groupby(colonnegroupement)[colonneimputer].median()
+    medianegardee = medianecalcule[medianecalcule.index.isin(CountKeep)]
+    medianeglobale = train2[colonneimputer].median() 
+    valeur_a_imputer_train = train2[colonnegroupement].map(medianegardee).fillna(medianeglobale)
+    valeur_a_imputer_test = test2[colonnegroupement].map(medianegardee).fillna(medianeglobale)
+    train2[colonneimputer] = train2[colonneimputer].fillna(valeur_a_imputer_train)
+    test2[colonneimputer] = test2[colonneimputer].fillna(valeur_a_imputer_test)
+    return train2, test2
 
