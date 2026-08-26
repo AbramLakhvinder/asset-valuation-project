@@ -99,4 +99,31 @@ def imputer_valeurs_rares(dataframe, col_groupe, col_calcul, seuil_pourcentage, 
          mask = dataframe[col_groupe].isin(groupes_a_changer) & dataframe[i].isna()
          dataframe.loc[mask, i] = valeur_remplacement
     return dataframe
-        
+
+def construire_copies_finales(train, test):
+    cols_cat = train.select_dtypes(include="object").columns
+
+    train_sklearn = train.copy()
+    test_sklearn = test.copy()
+    encoder = OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1)
+    train_sklearn[cols_cat] = encoder.fit_transform(train_sklearn[cols_cat])
+    test_sklearn[cols_cat] = encoder.transform(test_sklearn[cols_cat])
+
+    train_xgb = train_sklearn.copy()
+    test_xgb = test_sklearn.copy()
+    for col in ["YearMade", "MachineHoursCurrentMeter"]:
+        train_xgb.loc[train[f"{col}_was_nan"] == 1, col] = np.nan
+        test_xgb.loc[test[f"{col}_was_nan"] == 1, col] = np.nan
+
+    return train_sklearn, test_sklearn, train_xgb, test_xgb
+
+def split_X_y(trainA, testA, trainB, testB, y, col_exclue):
+    X_trainA = trainA.drop(columns=[y] + col_exclue)
+    y_trainA = trainA[y]
+    X_trainB = trainB.drop(columns=[y] + col_exclue)
+    y_trainB = trainB[y]
+    X_testA = testA.drop(columns=[y] + col_exclue)
+    y_testA = testA[y]
+    X_testB = testB.drop(columns=[y] + col_exclue)        
+    y_testB = testB[y]
+    return X_trainA, y_trainA, X_testA, y_testA, X_trainB, y_trainB, X_testB, y_testB
