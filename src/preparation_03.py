@@ -28,8 +28,8 @@ class Preparation03(BaseEstimator, TransformerMixin):
     """Transformer scikit-learn : `fit` sur l'apprentissage, `transform` partout.
 
     Deux traitements des catégories manquantes :
-    A — `Missing` pour toutes ;
-    B — `Absent dans ce segment` quand l'absence dépasse 95 % dans une famille.
+    A : `Missing` pour toutes ;
+    B : `Absent dans ce segment` quand l'absence dépasse 95 % dans une famille.
 
     Les catégories restent textuelles : CatBoost les prend telles quelles.
     """
