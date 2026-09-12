@@ -1,0 +1,24 @@
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+/resultats/
+CLAUDE.md
+.claude/
+.agents/
+Claude outputs/
+
+# Données brutes non versionnées, mais l'arborescence attendue reste visible :
+# git ne peut ré-inclure un fichier que si chaque dossier parent est ré-inclus.
+data/*
+!data/raw/
+data/raw/*
+!data/raw/bluebook-for-bulldozers/
+data/raw/bluebook-for-bulldozers/*
+!data/raw/bluebook-for-bulldozers/.gitkeep
+
+# Documents de travail internes : la feuille de route (planning/PLAN.md) reste
+# publiée, le journal et les rapports d'audit non.
+planning/suivi_modifications.md
+planning/audit_revue_*.md
