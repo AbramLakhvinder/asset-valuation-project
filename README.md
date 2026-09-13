@@ -6,7 +6,9 @@
 
 Ce projet de data science prédit le prix de vente aux enchères d'engins de chantier d'occasion à partir de leurs caractéristiques et de la date de vente, sur la base de la compétition Kaggle [« Blue Book for Bulldozers »](https://www.kaggle.com/competitions/bluebook-for-bulldozers/data).
 
-**État actuel du dépôt :** l'étape de préparation des données (notebook 01, `src/preparation_03.py`, `src/fonctions_preparation_03.py`), l'étude comparant les représentations A/B des absences puis la segmentation par famille (notebook 02, `src/experiences_02.py`), la synthèse des expériences (notebook 03 : comparaison des baselines, comparaison global/segmenté, sélection de la méthode et de l'architecture par triangulation de critères fixés à l'avance) ainsi que l'entraînement final et l'évaluation sur les ventes de 2012 (notebook 04) sont poussés et testés.
+**État actuel du dépôt :** l'étape de préparation des données (notebook 01, `src/preparation_03.py`, `src/fonctions_preparation_03.py`), l'étude comparant les représentations A/B des absences puis la segmentation par famille (notebook 02, `src/experiences_02.py`), la synthèse des expériences (notebook 03 : comparaison des baselines, comparaison global/segmenté, sélection de la méthode et de l'architecture par triangulation de critères fixés à l'avance), l'entraînement final et l'évaluation sur les ventes de 2012 (notebook 04) ainsi que la comparaison exploratoire avec des modèles spécialisés par famille sur ce même test (notebook 05) sont poussés et testés.
+
+![RMSLE par famille, modèle global contre modèles spécialisés, sur les ventes de 2012](docs/rmsle_par_famille.png)
 
 ## Résultats
 
@@ -15,8 +17,9 @@ Le modèle final (méthode A, CatBoost global, `ProductGroup` comme variable cat
 | Architecture | RMSLE test 2012 |
 |---|---:|
 | CatBoost global (retenu pour la production) | 0,24043 |
+| CatBoost spécialisé par famille (exploratoire) | 0,22689 |
 
-Le notebook 03 avait, selon son protocole prédictif fixé à l'avance, sélectionné l'architecture segmentée. Le notebook 04 retient malgré tout le **global** pour cette première version : c'est un arbitrage d'exploitation, pas un désaccord avec le résultat prédictif — un seul modèle à versionner, réentraîner et surveiller, contre six spécialistes et un modèle de repli.
+Le notebook 03 avait, selon son protocole prédictif fixé à l'avance, sélectionné l'architecture segmentée. Le notebook 04 retient malgré tout le **global** pour cette première version : c'est un arbitrage d'exploitation, pas un désaccord avec le résultat prédictif — un seul modèle à versionner, réentraîner et surveiller, contre six spécialistes et un modèle de repli. Le notebook 05 confirme, sur le test 2012 réel, que la segmentation aurait fait mieux dans les six familles (réduction relative du RMSLE de 5,63 %), sans remplacer la décision d'exploitation déjà prise.
 
 ## Préparation des données
 
@@ -39,6 +42,7 @@ Deux traitements catégoriels sont comparés :
 | [02 : Expériences](notebooks/02%20-%20Experiences.ipynb) | Étude : comparaison A/B des absences et segmentation par `ProductGroup`, cellule par cellule |
 | [03 : Synthèse des expériences](notebooks/03%20-%20Synthese%20des%20experiences.ipynb) | Étude : baselines, comparaison global/segmenté, sélection de la méthode et de l'architecture par triangulation de critères fixés à l'avance |
 | [04 : Modélisation finale](notebooks/04%20-%20Modelisation%20finale.ipynb) | Entraînement du modèle retenu sur tout l'historique antérieur à 2012 et évaluation sur le test 2012 |
+| [05 : Modélisation segmentée](notebooks/05%20-%20Modelisation%20segmentee.ipynb) | Comparaison exploratoire, sur le même test 2012, avec des modèles spécialisés par famille |
 | [src/experiences_02.py](src/experiences_02.py) | Industrialisation : `check_split`, `fit_pair`, `architecture_gain` |
 | [src/preparation_03.py](src/preparation_03.py) | Industrialisation : classe `Preparation03` (`fit`/`transform`) |
 | [src/fonctions_preparation_03.py](src/fonctions_preparation_03.py) | Fonctions autonomes utilisées par l'étude notebook |
