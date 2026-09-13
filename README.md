@@ -6,7 +6,7 @@
 
 Ce projet de data science prédit le prix de vente aux enchères d'engins de chantier d'occasion à partir de leurs caractéristiques et de la date de vente, sur la base de la compétition Kaggle [« Blue Book for Bulldozers »](https://www.kaggle.com/competitions/bluebook-for-bulldozers/data).
 
-**État actuel du dépôt :** l'étape de préparation des données (notebook 01) et son industrialisation (`src/preparation_03.py`, `src/fonctions_preparation_03.py`) sont poussées et testées. Les étapes suivantes (expériences de modélisation, comparaison global/segmenté, résultats finaux) sont en cours de revue et seront ajoutées au fil des prochains commits.
+**État actuel du dépôt :** l'étape de préparation des données (notebook 01, `src/preparation_03.py`, `src/fonctions_preparation_03.py`) et l'étude comparant les représentations A/B des absences puis la segmentation par famille (notebook 02, `src/experiences_02.py`) sont poussées et testées. Les étapes suivantes (synthèse via les modules `src/`, entraînement final et évaluation sur 2012) sont en cours de revue et seront ajoutées au fil des prochains commits.
 
 ## Préparation des données
 
@@ -26,9 +26,11 @@ Deux traitements catégoriels sont comparés :
 | Fichier | Rôle |
 |---|---|
 | [01 : Préparation](notebooks/01%20-%20Preparation.ipynb) | Étude : exploration et traitements A/B, cellule par cellule |
+| [02 : Expériences](notebooks/02%20-%20Experiences.ipynb) | Étude : comparaison A/B des absences et segmentation par `ProductGroup`, cellule par cellule |
+| [src/experiences_02.py](src/experiences_02.py) | Industrialisation : `check_split`, `fit_pair`, `architecture_gain` |
 | [src/preparation_03.py](src/preparation_03.py) | Industrialisation : classe `Preparation03` (`fit`/`transform`) |
 | [src/fonctions_preparation_03.py](src/fonctions_preparation_03.py) | Fonctions autonomes utilisées par l'étude notebook |
-| [tests/](tests/) | Contrôles de non-fuite et d'équivalence des formats d'identifiants |
+| [tests/](tests/) | Contrôles de non-fuite, d'équivalence des formats d'identifiants, de garde-fous temporels et de routage par segment |
 
 ## Reproduire
 
