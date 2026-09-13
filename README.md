@@ -6,7 +6,7 @@
 
 Ce projet de data science prédit le prix de vente aux enchères d'engins de chantier d'occasion à partir de leurs caractéristiques et de la date de vente, sur la base de la compétition Kaggle [« Blue Book for Bulldozers »](https://www.kaggle.com/competitions/bluebook-for-bulldozers/data).
 
-**État actuel du dépôt :** l'étape de préparation des données (notebook 01, `src/preparation_03.py`, `src/fonctions_preparation_03.py`) et l'étude comparant les représentations A/B des absences puis la segmentation par famille (notebook 02, `src/experiences_02.py`) sont poussées et testées. Les étapes suivantes (synthèse via les modules `src/`, entraînement final et évaluation sur 2012) sont en cours de revue et seront ajoutées au fil des prochains commits.
+**État actuel du dépôt :** l'étape de préparation des données (notebook 01, `src/preparation_03.py`, `src/fonctions_preparation_03.py`), l'étude comparant les représentations A/B des absences puis la segmentation par famille (notebook 02, `src/experiences_02.py`) et la synthèse des expériences (notebook 03 : comparaison des baselines, comparaison global/segmenté, sélection de la méthode et de l'architecture par triangulation de critères fixés à l'avance) sont poussées et testées. Les étapes suivantes (entraînement final et évaluation sur 2012) sont en cours de revue et seront ajoutées au fil des prochains commits.
 
 ## Préparation des données
 
@@ -27,6 +27,7 @@ Deux traitements catégoriels sont comparés :
 |---|---|
 | [01 : Préparation](notebooks/01%20-%20Preparation.ipynb) | Étude : exploration et traitements A/B, cellule par cellule |
 | [02 : Expériences](notebooks/02%20-%20Experiences.ipynb) | Étude : comparaison A/B des absences et segmentation par `ProductGroup`, cellule par cellule |
+| [03 : Synthèse des expériences](notebooks/03%20-%20Synthese%20des%20experiences.ipynb) | Étude : baselines, comparaison global/segmenté, sélection de la méthode et de l'architecture par triangulation de critères fixés à l'avance |
 | [src/experiences_02.py](src/experiences_02.py) | Industrialisation : `check_split`, `fit_pair`, `architecture_gain` |
 | [src/preparation_03.py](src/preparation_03.py) | Industrialisation : classe `Preparation03` (`fit`/`transform`) |
 | [src/fonctions_preparation_03.py](src/fonctions_preparation_03.py) | Fonctions autonomes utilisées par l'étude notebook |
