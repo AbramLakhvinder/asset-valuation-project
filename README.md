@@ -19,7 +19,7 @@ Le modèle final (méthode A, CatBoost global, `ProductGroup` comme variable cat
 | CatBoost global (retenu pour la production) | 0,24043 |
 | CatBoost spécialisé par famille (exploratoire) | 0,22689 |
 
-Le notebook 03 avait, selon son protocole prédictif fixé à l'avance, sélectionné l'architecture segmentée. Le notebook 04 retient malgré tout le **global** pour cette première version : c'est un arbitrage d'exploitation, pas un désaccord avec le résultat prédictif — un seul modèle à versionner, réentraîner et surveiller, contre six spécialistes et un modèle de repli. Le notebook 05 confirme, sur le test 2012 réel, que la segmentation aurait fait mieux dans les six familles (réduction relative du RMSLE de 5,63 %), sans remplacer la décision d'exploitation déjà prise.
+Le notebook 03 avait, selon son protocole prédictif fixé à l'avance, sélectionné l'architecture segmentée. Le notebook 04 retient malgré tout le **global** pour cette première version : c'est un arbitrage d'exploitation, pas un désaccord avec le résultat prédictif - un seul modèle à versionner, réentraîner et surveiller, contre six spécialistes et un modèle de repli. Le notebook 05 confirme, sur le test 2012 réel, que la segmentation aurait fait mieux dans les six familles (réduction relative du RMSLE de 5,63 %), sans remplacer la décision d'exploitation déjà prise.
 
 ## Préparation des données
 
@@ -63,11 +63,11 @@ py -3.12 -m venv .venv
 ```
 
 3. Choisir le noyau de cet environnement, puis exécuter les notebooks dans cet ordre :
-   1. **01 : Préparation** — d'abord avec `FENETRE = "principal"`, puis avec `FENETRE = "confirmation"` (écrit la préparation dans `resultats/notebooks_03/<fenetre>/`, relue par le notebook 02).
-   2. **02 : Expériences** — relit la préparation des deux fenêtres, compare les traitements A/B et la segmentation par famille.
-   3. **03 : Synthèse des expériences** — recharge le CSV brut de façon autonome (pas de dépendance aux notebooks 01/02), sélectionne la méthode et l'architecture.
-   4. **04 : Modélisation finale** — entraîne le modèle retenu et l'évalue sur 2012 (écrit dans `resultats/modele_final_global_A/`, relu par le notebook 05).
-   5. **05 : Modélisation segmentée** — relit les résultats du notebook 04 et les compare à des modèles spécialisés par famille.
+   1. **01 : Préparation** - d'abord avec `FENETRE = "principal"`, puis avec `FENETRE = "confirmation"` (écrit la préparation dans `resultats/notebooks_03/<fenetre>/`, relue par le notebook 02).
+   2. **02 : Expériences** - relit la préparation des deux fenêtres, compare les traitements A/B et la segmentation par famille.
+   3. **03 : Synthèse des expériences** - recharge le CSV brut de façon autonome (pas de dépendance aux notebooks 01/02), sélectionne la méthode et l'architecture.
+   4. **04 : Modélisation finale** - entraîne le modèle retenu et l'évalue sur 2012 (écrit dans `resultats/modele_final_global_A/`, relu par le notebook 05).
+   5. **05 : Modélisation segmentée** - relit les résultats du notebook 04 et les compare à des modèles spécialisés par famille.
 
 Les données brutes sont exclues de Git.
 
