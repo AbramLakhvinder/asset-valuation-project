@@ -62,7 +62,12 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m jupyterlab
 ```
 
-3. Choisir le noyau de cet environnement, puis exécuter le notebook 01, d'abord avec `FENETRE = "principal"`, puis avec `FENETRE = "confirmation"`.
+3. Choisir le noyau de cet environnement, puis exécuter les notebooks dans cet ordre :
+   1. **01 : Préparation** — d'abord avec `FENETRE = "principal"`, puis avec `FENETRE = "confirmation"` (écrit la préparation dans `resultats/notebooks_03/<fenetre>/`, relue par le notebook 02).
+   2. **02 : Expériences** — relit la préparation des deux fenêtres, compare les traitements A/B et la segmentation par famille.
+   3. **03 : Synthèse des expériences** — recharge le CSV brut de façon autonome (pas de dépendance aux notebooks 01/02), sélectionne la méthode et l'architecture.
+   4. **04 : Modélisation finale** — entraîne le modèle retenu et l'évalue sur 2012 (écrit dans `resultats/modele_final_global_A/`, relu par le notebook 05).
+   5. **05 : Modélisation segmentée** — relit les résultats du notebook 04 et les compare à des modèles spécialisés par famille.
 
 Les données brutes sont exclues de Git.
 
